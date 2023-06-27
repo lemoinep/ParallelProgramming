@@ -25,6 +25,9 @@
 
 1.6 GPGPU Evolution
 
+1.7 TPU (Tensor Processing Unit) form Google
+
+
 *2. Programming interface for parallel computing*
 
 2.1 MPI (Message Passing Interface)
@@ -742,7 +745,8 @@ at ultra-high speeds but must be paired with a CPU to give and execute
 instructions.
 
 
-image:Data/media/iimage21.png[image,width=544,height=419]
+image:Data/media/image22.png[image,width=544,height=419]
+
 
 *Applications for TPUs*
 
