@@ -103,7 +103,7 @@ are used to store variables, the intermediate results of operations
 
 The register structure varies from processor to processor. This is why
 each type of CPU has
-image:vertopal_00e7e1a4d1374ea98d0ee2fc303f677c/media/image1.png[image,width=322,height=220]its
+image:Data/media/image1.png[image,width=322,height=220]its
 own instruction set. Their basic functions are nevertheless similar and
 all processors have roughly the same categories of registers:
 
@@ -203,7 +203,7 @@ application.
 
 Explicit code targeting GPUs: CUDA, HIP, SYCL, Kokkos, RAJA,...
 
-image:vertopal_00e7e1a4d1374ea98d0ee2fc303f677c/media/image2.png[image,width=288,height=142]
+image:Data/media/image2.png[image,width=288,height=142]
 
 _Fig: illustrates the main hardware architecture differences between
 CPUs and GPUs. The transistor counts associated with various functions
@@ -280,7 +280,7 @@ GPUs can be 10+X faster than GPUs for parallel code.
 
 *1.3 GPGPU ( General-Purpose Graphics Processing Unit)*
 
-image:vertopal_00e7e1a4d1374ea98d0ee2fc303f677c/media/image4.png[image,width=642,height=331]
+image:Data/media/image4.png[image,width=642,height=331]
 
 A *General-Purpose Graphics Processing Unit* (GPGPU) is a graphics
 processing unit (GPU) that is programmed for purposes beyond graphics
@@ -354,7 +354,7 @@ mapping
 Such an architecture is said to be "throughput-oriented". The latest
 from the Santa-Clara firm, codenamed “Fermi” has 512 cores.
 
-image:vertopal_00e7e1a4d1374ea98d0ee2fc303f677c/media/image5.png[image,width=530,height=241]
+image:Data/media/image5.png[image,width=530,height=241]
 
 _CPU architecture vs. GPUs_
 
@@ -704,7 +704,7 @@ New containers are continually being added to the hub.
 
 == AMD Fusion System Architecture Moves to Unify CPUs and GPUs
 
-image:vertopal_00e7e1a4d1374ea98d0ee2fc303f677c/media/image6.png[image,width=511,height=287]
+image:Data/media/image6.png[image,width=511,height=287]
 
 *2. Programming interface for parallel computing*
 
@@ -728,7 +728,7 @@ Note: on a cluster of independent shared-memory multiprocessor machines
 in the same program can be a major advantage for the parallel
 performance of the code.
 
-image:vertopal_00e7e1a4d1374ea98d0ee2fc303f677c/media/image7.png[image,width=281,height=136]
+image:Data/media/image7.png[image,width=281,height=136]
 
 [width="100%",cols="50%,50%",]
 |===
@@ -2879,7 +2879,7 @@ pure MPI scalability runs out.
 
 A common hybrid approach
 
-image:vertopal_00e7e1a4d1374ea98d0ee2fc303f677c/media/image9.png[image,width=307,height=155]
+image:Data/media/image9.png[image,width=307,height=155]
 
 * From dequential code, alongside MPI first, then try adding OpenMP
 * From MPI code, add OpenMP
@@ -2889,21 +2889,21 @@ parallel region and allow only the master thread to communicate between
 MPI tasks.
 * Could use MPI in parallel region with thread-safe MPI.
 
-image:vertopal_00e7e1a4d1374ea98d0ee2fc303f677c/media/image10.png[image,width=264,height=166]
+image:Data/media/image10.png[image,width=264,height=166]
 
 [width="100%",cols="50%,50%",]
 |===
-|image:vertopal_00e7e1a4d1374ea98d0ee2fc303f677c/media/image12.png[image,width=261,height=214]
-|image:vertopal_00e7e1a4d1374ea98d0ee2fc303f677c/media/image13.png[image,width=294,height=173]
+|image:Data/media/image12.png[image,width=261,height=214]
+|image:Data/media/image13.png[image,width=294,height=173]
 
-|image:vertopal_00e7e1a4d1374ea98d0ee2fc303f677c/media/image14.png[image,width=208,height=173]
+|image:Data/media/image14.png[image,width=208,height=173]
 |
 
-|image:vertopal_00e7e1a4d1374ea98d0ee2fc303f677c/media/image15.png[image,width=276,height=226]
-|image:vertopal_00e7e1a4d1374ea98d0ee2fc303f677c/media/image16.png[image,width=258,height=184]
+|image:Data/media/image15.png[image,width=276,height=226]
+|image:Data/media/image16.png[image,width=258,height=184]
 
-|image:vertopal_00e7e1a4d1374ea98d0ee2fc303f677c/media/image17.png[image,width=272,height=163]
-|image:vertopal_00e7e1a4d1374ea98d0ee2fc303f677c/media/image18.png[image,width=254,height=191]
+|image:Data/media/image17.png[image,width=272,height=163]
+|image:Data/media/image18.png[image,width=254,height=191]
 |===
 
 *3.Star PU*
@@ -2932,7 +2932,7 @@ StarPU internally deals with the following aspects:
 discrete memories
 * Optimized cluster communications
 
-image:vertopal_00e7e1a4d1374ea98d0ee2fc303f677c/media/image19.png[image,width=179,height=179]
+image:Data/media/image19.png[image,width=179,height=179]
 
 Links:
 
@@ -2953,7 +2953,7 @@ with StarPU but is written in modern C++. It also supports speculative
 execution, which is the ability to run tasks ahead of time if others are
 unsure about changing the data.
 
-image:vertopal_00e7e1a4d1374ea98d0ee2fc303f677c/media/image21.png[image,width=642,height=380]
+image:Data/media/image21.png[image,width=642,height=380]
 
 *4.1 Workflow*
 
