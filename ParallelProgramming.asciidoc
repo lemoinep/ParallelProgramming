@@ -162,7 +162,10 @@ As it is not always possible to increase the frequency, the only way to
 increase the number of instructions processed in a given time is to seek
 to execute several of them simultaneously. This is achieved by splitting
 processor resources, data and/or processes. This is called the
-parallelization .
+parallelization.
+
+
+
 
 *The different architectures of the processor*
 
@@ -356,6 +359,7 @@ multiple (software) threads sharing a stream of instructions
 • Performance is highly dependent on understanding work items to SIMD
 mapping
 
+
 *1.4 Architecture of a GPU versus CPU*
 
 Such an architecture is said to be "throughput-oriented". The latest
@@ -384,8 +388,7 @@ is displayed.
 This type of processor has small independent calculation units which
 execute the instructions in the order in which they appear in the
 program, there is ultimately little dynamic control over the execution.
-The term *SIMD* is used for these processors ( *S* ingle *Instruction M*
-ultiple *D* ata) .
+Thea term *SIMD* is used for these processors (**S**ingle **I**nstruction **M**ultiple **Da**ta).
 
 Each PU (Processing Unit) does not necessarily correspond to a
 processor, they are calculation units. In this mode, the same
@@ -709,7 +712,11 @@ including several applications such as Chroma, CP2k, LAMMPS, NAMD,
 OpenMM, etc., as well as frameworks Popular TensorFlow and PyTorch MLs.
 New containers are continually being added to the hub.
 
-== AMD Fusion System Architecture Moves to Unify CPUs and GPUs
+
+
+
+== AMD Fusion System Architecture 
+=== Moves to Unify CPUs and GPUs
 
 image:Data/media/image6.png[image,width=511,height=287]
 
@@ -1083,57 +1090,53 @@ MPI_Reduce() followed by an MPI_Bcast()): MPI_Allreduce().
 
 *General distribution*
 
-    int MPI_Bcast( *void* *message, *int* length, MPI_Datatype
+    int MPI_Bcast( void *message, int length, MPI_Datatype,
     type_message, *int* rank_source, MPI_Comm comm)
 
 *Selective dissemination*
 
     int MPI_Scatter ( const void *message_to_be restarted, int
     length_message_sent, MPI_Datatype type_message_sent, void
-    *message_received,*
-    
-    int length_message_recu, MPI_Datatype type_message_recu, *int*
+    *message_received, int length_message_recu, MPI_Datatype type_message_recu, int
     rank_source, MPI_Comm comm)
 
 *Collection*
 
-    int MPI_Gather ( *const void* *message_sent, *int*
-    length_message_sent, MPI_Datatype type_message_sent, *void*
-    *message_received, *int* length_message_received, MPI_Datatype
+    int MPI_Gather ( const void *message_sent, int
+    length_message_sent, MPI_Datatype type_message_sent, void
+    *message_received, int length_message_received, MPI_Datatype
     type_message_received, *int* rank_dest, MPI_Comm comm)
 
 *General collection*
 
-    int MPI_Allgather ( *const void* *message_sent, *int*
-    length_message_sent, MPI_Datatype type_message_sent, *void*
-    *message_received, *int* length_message_received, MPI_Datatype
+    int MPI_Allgather ( const void *message_sent, int
+    length_message_sent, MPI_Datatype type_message_sent, void
+    *message_received, int length_message_received, MPI_Datatype
     type_message_received, MPI_Comm comm)
 
 *"Variable" collection*
 
-    int MPI_Gatherv ( *const void* *message_sent, *int*
-    length_message_sent, MPI_Datatype type_message_sent, *void*
-    *message_received, *const int* *nb_elts_recus, *const int* *deplts,
+    int MPI_Gatherv ( const void *message_sent, int
+    length_message_sent, MPI_Datatype type_message_sent, void
+    *message_received, const int *nb_elts_recus, const int *deplts,
     MPI_Datatype type_message_recu, *int* rang_dest, MPI_Comm comm)
 
 *Selective collections and distributions*
 
-    int MPI_Alltoall ( *const void* *message_sent, *int*
-    length_message_sent, MPI_Datatype type_message_sent, *void*
-    *message_received, *int* length_message_received, MPI_Datatype
+    int MPI_Alltoall ( const void *message_sent, int
+    length_message_sent, MPI_Datatype type_message_sent, void
+    *message_received, int length_message_received, MPI_Datatype
     type_message_received, MPI_Comm comm)
 
 *Distributed reductions*
 
-    int MPI_Reduce ( *const void *message_sent, void *message_received,
+    int MPI_Reduce ( const void *message_sent, void *message_received,
     int length, MPI_Datatype type_message, MPI_Op operation, int rank_dest,*
     MPI_Comm comm)
 
 *Distributed reductions with distribution of the result*
 
-    int MPI_Allreduce ( *const void* *message_sent, *void*
-    *message_received, *int* length, MPI_Datatype, type_message, MPI_Op
-    operation, MPI_Comm comm)
+    int MPI_Allreduce ( const void *message_sent, void *message_received, *int* length, MPI_Datatype, type_message, MPI_Op operation, MPI_Comm comm)
 
 
 
@@ -1194,10 +1197,9 @@ and MPI_Buffer_detach()). They must be allocated taking into account the
 memory overhead of the messages (by adding the MPI_BSEND_OVERHEAD
 constant for each message instance).
 
-    int MPI_Buffer_attach ( *void* *buf, *int* size_buf) +
-    int MPI_Buffer_detach ( *void* *buf, *int* size_buf) +
-    int MPI_Bsend( *const void* *values, *int* size, MPI_Datatype
-    type_message, *int* dest, *int* label, MPI_Comm comm)
+    int MPI_Buffer_attach ( void *buf, int size_buf) 
+    int MPI_Buffer_detach ( void *buf, int size_buf) 
+    int MPI_Bsend( const void *values, int size, MPI_Datatype type_message, int dest, int label, MPI_Comm comm)
 
 
 *Advantages of buffered mode*
@@ -1229,8 +1231,7 @@ on the sender and/or receiver side (and consuming memory resources)
 MPI_Send() subroutine . In most implementations, this mode switches from
 buffered _(_ eager _)_ to synchronous mode as message sizes grow.
 
-*int* MPI_Send( *const void* *values, *int* size, MPI_Datatype
-type_message, *int* dest, *int* label, MPI_Comm comm)
+    int MPI_Send( const void *values, int size, MPI_Datatype type_message, int dest, int label, MPI_Comm comm)
 
 
 *Benefits of standard mode*
@@ -1254,19 +1255,17 @@ immediate reuse of the memory space used in the call. It is necessary to
 ensure that the communication is indeed terminated (with MPI_Wait() for
 example) before using it again.
 
-*int* MPI_Isend( *const void* *values, *int* size, MPI_Datatype
-message_type, *int* dest, *int* label, MPI_Comm comm, MPI_Request *req)
-
-*int* MPI_Issend ( *const void* *values, *int* size, MPI_Datatype
-message_type, *int* dest, *int* label, MPI_Comm comm, MPI_Request *req)
-
-*int* MPI_Ibsend( *const void* *values, *int* size, MPI_Datatype
-message_type, *int* dest, *int* label, MPI_Comm comm, MPI_Request *req)
-
-*int* MPI_Irecv( *void* *values, *int* size, MPI_Datatype type_message,
-*int* source,
-
-*int* label, MPI_Comm comm, MPI_Request *req)
+    int MPI_Isend( const void *values, int size, MPI_Datatype
+    message_type, int dest, int label, MPI_Comm comm, MPI_Request *req)
+    
+    int MPI_Issend ( const void* values, int size, MPI_Datatype
+    message_type, int dest, int label, MPI_Comm comm, MPI_Request *req)
+    
+    int MPI_Ibsend( const void* values, int size, MPI_Datatype
+    message_type, int dest, int label, MPI_Comm comm, MPI_Request *req)
+    
+    int MPI_Irecv( void *values, int size, MPI_Datatype type_message,
+    int* source, int label, MPI_Comm comm, MPI_Request *req)
 
 
 *Benefits of non-blocking calls*
@@ -1296,35 +1295,30 @@ collectives in MPI 3.0)
 MPI_Wait() waits for the end of a communication. MPI_Test() is the
 non-blocking version.
 
-*int* MPI_Wait ( MPI_Request *req, MPI_Status *status) +
-*int* MPI_Test( MPI_Request *req, *int* *flag, MPI_Status *status)
+    int MPI_Wait ( MPI_Request *req, MPI_Status *status) +
+    int MPI_Test( MPI_Request *req, int *flag, MPI_Status *status)
 
 MPI_Waitall() waits for all communications to end. MPI_Testall() is the
 non-blocking version.
 
-*int* MPI_Waitall ( *int* size, MPI_Request reqs[], MPI_Status
-statuses[]) +
-*int* MPI_Testall ( *int* size, MPI_Request reqs[], *int* *flag,
-MPI_Status statuses[])
+    int MPI_Waitall ( int size, MPI_Request reqs[], MPI_Status statuses[]) 
+    int* MPI_Testall ( int size, MPI_Request reqs[], int *flag, MPI_Status statuses[])
 
 MPI_Waitany waits for the end of one communication among several.
 
-*int* MPI_Waitany ( *int* size, MPI_Request reqs[], *int* *index,
-MPI_Status *status)
+    int MPI_Waitany ( int size, MPI_Request reqs[], int *index,MPI_Status *status)
 
-MPI_Testany is the non-blocking version. +
-*int* MPI_Testany( *i nt* size, MPI_Request reqs[], *int* *index, *int*
-*flag, MPI_Status *status)
+MPI_Testany is the non-blocking version. 
+
+    int* MPI_Testany( int size, MPI_Request reqs[], int *index, int *flag, MPI_Status *status)
 
 MPI_Waitsome is waiting for the end of one or more communications.
 
-*int* MPI_Waitsome( *int* size, MPI_Request reqs[], *int* *endcount,
-*int* *indexes, MPI_Status *status)
+    int MPI_Waitsome( int size, MPI_Request reqs[], int *endcount,int *indexes, MPI_Status *status)
 
 MPI_Testsome is the non-blocking version.
 
-*int* MPI_Testsome( *int* size, MPI_Request reqs[], *int* *endcount,
-*int* *indexes, MPI_Status *status)
+    int MPI_Testsome( int size, MPI_Request reqs[], int *endcount,int *indexes, MPI_Status *status)
 
 *Memory-to-memory communications (RMA)*
 
@@ -1684,36 +1678,36 @@ or by setting the OMP_NESTED environment variable.
     
     #include <omp.h>
     
-    int main() +
-    { +
+    int main() 
+    { 
     int row;
     
     
-    #pragma omp parallel private(rank) num_threads(3) +
-    { +
-    rank=omp_get_thread_num(); +
+    #pragma omp parallel private(rank) num_threads(3) 
+    { 
+    rank=omp_get_thread_num(); 
     printf("My rank in region 1: %d \n",rank);
     
-    #pragma omp parallel private(rank) num_threads(2) +
-    { +
-    rank=omp_get_thread_num(); +
-    printf(" My rank in region 2: %d \n",rank); +
+    #pragma omp parallel private(rank) num_threads(2) 
+    { 
+    rank=omp_get_thread_num(); 
+    printf(" My rank in region 2: %d \n",rank); 
     }
     
     }
     
     
-    return 0; +
+    return 0; 
     }
     
-    My rank in region 1: 0 +
-    My rank in region 2: 1 +
-    My rank in region 2: 0 +
-    My rank in region 1: 2 +
-    My rank in region 2: 1 +
-    My rank in region 2: 0 +
-    My rank in region 1: 1 +
-    My rank in region 2: 0 +
+    My rank in region 1: 0 
+    My rank in region 2: 1 
+    My rank in region 2: 0 
+    My rank in region 1: 2 
+    My rank in region 2: 1 
+    My rank in region 2: 0 
+    My rank in region 1: 1 
+    My rank in region 2: 0 
     My rank in region 2: 1
 
 *Work sharing*
@@ -2124,74 +2118,43 @@ The loop iteration variable is private by default, so it is not
 necessary to specify it explicitly in a private clause
 
     void simple(int n, float *a, float *b)
-    
     {
-    
     int i;
-    
     *#pragma omp parallel for*
-    
     for (i=1; i<n; i++) /* i is private by default */
-    
     b[i] = (a[i] + a[i-1]) / 2.0;
-    
     }
     
-    |The Parallel Construct a|
-    The parallel construct can be used in coarse-grain parallel programs.
+_    |The Parallel Construct a|
+    The parallel construct can be used in coarse-grain parallel programs._
     
     void subdomain(float *x, int istart, int ipoints)
-    
     {
-    
-    
     int i;
-    
     for (i = 0; i < ipoints; i++)
-    
     x[istart+i] = 123.456;
-    
     }
     
     void sub(float *x, int npoints)
-    
     {
-    
-    
     int iam, nt, ipoints, istart;
-    
     *#pragma omp parallel default(shared) private(iam,nt,ipoints,istart)*
-    
     {
-    
     iam = omp_get_thread_num();
-    
     nt = omp_get_num_threads();
-    
     ipoints = npoints / nt; /* size of partition */
-    
     istart = iam * ipoints; /* starting array index */
-    
     if (iam == nt-1) /* last thread may do more */
-    
     ipoints = npoints - istart;
-    
     subdomain(x, istart, ipoints);
-    
     }
-    
     }
     
     main()
-    
     {
-    
-    float array[10000];
-    
-    sub(array, 10000);
-    
+    float array[10000]
+    sub(array, 10000)
     return 0;
-    
     }
 
 |Controlling the Number of threads on Multiple Nesting Levels |The
@@ -2206,21 +2169,13 @@ implementations that support it.
     #include <omp.h>
     
     int main()
-    
     {
-    
     omp_set_dynamic(0);
-    
     *#pragma omp parallel num_threads(10)*
-    
     {
-    
     /* do work here */
-    
     }
-    
     return 0;
-    
     }
 
 |The nowait Clause a|
@@ -2230,31 +2185,18 @@ loop construct
     
     #include <math.h>
     
-    void nowait_example(int n, int m, float *a, float *b, float *y, float
-    *z)
-    
+    void nowait_example(int n, int m, float *a, float *b, float *y, float *z)
     {
-    
     int i;
-    
     *#pragma omp parallel*
-    
     {
-    
     *#pragma omp for nowait*
-    
     for (i=1; i<n; i++)
-    
     b[i] = (a[i] + a[i-1]) / 2.0;
-    
     *#pragma omp for nowait*
-    
     for (i=0; i<m; i++)
-    
     y[i] = sqrt(z[i]);
-    
     }
-    
     }
 
 |The collapse Clause a|
@@ -2272,21 +2214,13 @@ speciﬁed for n if the collapse clause is not speciﬁed.
     int kl, ku, ks, jl, ju, js, il, iu,is;
     
     void sub(float *a)
-    
     {
-    
     int i, j, k;
-    
     *#pragma omp for collapse(2) private(i, k, j)*
-    
     for (k=kl; k<=ku; k+=ks)
-    
     for (j=jl; j<=ju; j+=js)
-    
     for (i=il; i<=iu; i+=is)
-    
     bar(a,i,j,k);
-    
     }
 
 |Linear Clause in Loop Constructs a|
@@ -2300,37 +2234,22 @@ _j_ is updated with the value _N/2_ from the last iteration of the loop.
     #define N 100
     
     int main(void)
-    
     {
-    
     float a[N], b[N/2];
-    
     int i, j;
-    
     for(i = 0;i<N;i++)
-    
     a[i] = i+1;
-    
     j=0
-    
     *#pragma omp parallel*
-    
     *#pragma omp for linear(j:1)*
-    
     for(i=0;i<N;i+=2){
-    
     b[j]= a[i] * 2.0f;
-    
     j++;
-    
     }
     
     printf"%d %f %f\n", j, b[0], b[j-1] );
-    
     /* print out: 50 2.0 198.0 */
-    
     return 0;
-    
     }
 
 |The firstprivate Clause and the sections Construct a|
@@ -2352,45 +2271,29 @@ unspecified, it is unspecified which section prints which value.
     int section_count = 0;
     
     *omp_set_dynamic(0);*
-    
     *omp_set_num_threads(NT);*
-    
-    
     *#pragma omp parallel*
-    
     *#pragma omp sections firstprivate( section_count )*
-    
     {
     
     *#pragma omp section*
-    
     {
-    
     section_count++;
-    
     /* may print the number one or two */
-    
     printf( "section_count %d\n", section_count );
     
     }
     
     *#pragma omp section*
-    
     {
-    
     section_count++;
-    
     /* may print the number one or two */
-    
     printf( "section_count %d\n", section_count );
-    
     }
     
     }
-    
     
     return 0;
-    
     }
 
 |The single Construct a|
@@ -2410,103 +2313,64 @@ assumptions as to which thread will execute a single region.
     
     void single_example()
     
-    {
-    
     
     *#pragma omp parallel*
-    
     {
-    
     *#pragma omp single*
-    
     printf("Beginning work1.\n");
-    
     work1();
-    
     *#pragma omp single*
-    
     printf("Finishing work1.\n");
-    
     *#pragma omp single nowait*
-    
     printf("Finished work1 and beginning work2.\n");
-    
     work2();
-    
+    }
     }
     
     
-    }
+    
     
     |The master Construct a|
     #include <stdio.h>
     
     extern float average(float,float,float);
-    
     void master_example( float* x, float* xold, int n, float tol )
-    
     {
-    
-    
     int c, i, toobig;
-    
     float error, y;
-    
     c = 0;
     
     #*pragma omp parallel*
-    
     {
-    
-    *do {*
-    
+    do {
     *#pragma omp for private(i)*
-    
     for( i = 1; i < n-1; ++i ){
-    
     xold[i] = x[i];
-    
     }
     
     *#pragma omp single*
-    
     {
-    
     toobig = 0;
-    
     }
     
     *#pragma omp for private(i,y,error) reduction(+:toobig)*
-    
     for(i=1; i<n-1;++i){
-    
     y = x[i];
-    
     x[i] = average( xold[i-1], x[i], xold[i+1] );
-    
     error = y - x[i];
-    
-    if( error > tol || error < -tol ) ++toobig;
-    
+    if( error > tol or error < -tol ) ++toobig;
     }
     
     *#pragma omp master*
-    
     {
-    
     ++c;
-    
     printf( "iteration %d, toobig=%d\n", c, toobig );
-    
     }
-    
-    *} while( toobig > 0 );*
-    
-    
+    } while( toobig > 0 );
     }
-    
-    
     }
+
+
 
 |Parrallel Random Access Iterator Loop a|
     #include <vector>
@@ -2514,23 +2378,15 @@ assumptions as to which thread will execute a single region.
     void iterator_example()
     
     {
-    
     std::vector<int> vec(23);
-    
     std::vector<int>::iterator it;
     
-    
     *#pragma omp parallel for default(none) shared(vec)*
-    
     for (it = vec.begin(); it < vec.end(); it++)
     
     {
-    
     // do work with *it //
-    
     }
-    
-    
     }
 
 |The omp_set_dynamic and omp_set_num_threads Routines a|
@@ -2547,31 +2403,17 @@ explicitly to ensure portability.
     void do_by_16(float *x, int iam, int ipoints) {}
     
     void dynthreads(float *x, int npoints)
-    
     {
-    
-    
     int iam, ipoints;
-    
     *omp_set_dynamic(0);*
-    
     *omp_set_num_threads(16);*
-    
     *#pragma omp parallel shared(x, npoints) private(iam, ipoints)*
-    
     {
-    
     if (omp_get_num_threads() != 16) abort();
-    
     iam = omp_get_thread_num();
-    
     ipoints = npoints/16;
-    
     do_by_16(x, iam, ipoints);
-    
     }
-    
-    
     }
 
 |===
