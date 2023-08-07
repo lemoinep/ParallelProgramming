@@ -1,3 +1,0 @@
-D:/DOCS/DOC0002/OpenMP/CMakeFiles/main.dir
-D:/DOCS/DOC0002/OpenMP/CMakeFiles/ALL_BUILD.dir
-D:/DOCS/DOC0002/OpenMP/CMakeFiles/ZERO_CHECK.dir
