@@ -54,7 +54,7 @@
 
 
 
-*1. CPU, GPU, GPGPU Architecture*
+=== 1. CPU, GPU, GPGPU Architecture
 
 CPU, GPU, and GPGPU architectures are all types of computer processing
 architectures, but they differ in their design and operation.
@@ -87,7 +87,7 @@ specialized graphics processing, and GPGPUs are a modified version of
 GPUs intended to be used for specialized computer processing other than
 graphics processing.
 
-*1.1 CPU*
+==== 1.1 CPU
 
 The CPU basically consists of three parts:
 
@@ -111,8 +111,7 @@ are used to store variables, the intermediate results of operations
 image:Data/media/image1.png[image,width=322,height=220]
 
 The register structure varies from processor to processor. This is why
-each type of CPU has its own instruction set. Their basic functions are nevertheless similar and
-all processors have roughly the same categories of registers:
+each type of CPU has its own instruction set. Their basic functions are nevertheless similar and all processors have roughly the same categories of registers:
 
 
 * The *accumulator* is primarily intended to hold the data that needs to
@@ -126,14 +125,9 @@ be processed by the ALU.
 These are, for example, the base and index registers which allow, among
 other things, to organize the data in memory like indexed tables.
 
-* The *instruction register* contains the code of the instruction which is
-processed by the decoder/sequencer.
+* The *instruction register* contains the code of the instruction which is processed by the decoder/sequencer.
 
-* The *ordinal counter* contains the address of the next instruction to be
-executed. In principle, this register never stops counting. It generates
-the addresses of the instructions to be executed one after the other.
-Some instructions sometimes require changing the contents of the ordinal
-counter to make a sequence break, ie a jump elsewhere in the program.
+* The *ordinal counter* contains the address of the next instruction to be executed. In principle, this register never stops counting. It generates the addresses of the instructions to be executed one after the other. Some instructions sometimes require changing the contents of the ordinal counter to make a sequence break, ie a jump elsewhere in the program.
 
 * The *status register,* sometimes called *the condition register,*
 contains indicators called _flags_ whose values (0 or 1) vary according
@@ -715,7 +709,7 @@ New containers are continually being added to the hub.
 
 
 
-== AMD Fusion System Architecture 
+=== AMD Fusion System Architecture 
 === Moves to Unify CPUs and GPUs
 
 image:Data/media/image6.png[image,width=511,height=287]
@@ -923,7 +917,7 @@ machine-learning applications.
 
 
 
-*2. Programming interface for parallel computing*
+=== 2. Programming interface for parallel computing
 
 *MPI, OpenMP two complementary parallelization models.*
 
@@ -2963,7 +2957,7 @@ image:Data/media/image10.png[image,width=264,height=166]
 |image:Data/media/image18.png[image,width=254,height=191]
 |===
 
-*3.Star PU*
+=== 3.Star PU
 
 *StarPU* is a task scheduling library for hybrid architectures. StarPU's
 goal is to design systems in which applications are distributed across
@@ -3003,7 +2997,7 @@ https://indico.math.cnrs.fr/event/6415/attachments/2736/3475/2021.02.24_-_exa2pr
 
 https://gitub.u-bordeaux.fr/starpu/starpu/-/tree/master/examples
 
-*4.Specx*
+=== 4.Specx
 
 *SPECX* is a task-based execution system. It shares many similarities
 with StarPU but is written in modern C++. It also supports speculative
