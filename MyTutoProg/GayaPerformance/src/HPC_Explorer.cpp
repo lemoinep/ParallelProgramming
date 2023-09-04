@@ -68,7 +68,7 @@ int main(int argc, char** argv) {
     if (NumOption==1) {
     
     
-    double MatDist[1000][1000];    
+  
     
 
     
@@ -95,7 +95,16 @@ int main(int argc, char** argv) {
     }
 
 
-    if (QSee) {  printf("Rank %d, baseptr = %p\n", world_rank, baseptr); }
+    if (QSee) {  
+      int numCPU = sysconf(_SC_NPROCESSORS_ONLN);
+      printf("NumCPU %d\n",numCPU);
+      // If Error : There are not enough slots available in the system to satisfy the 120
+      // slots that were requested by the application:
+      printf("Rank %d, baseptr = %p  world_size = %d\n", world_rank, baseptr,world_size);
+
+      
+
+    }
 
     float *arr = baseptr;
     
@@ -237,6 +246,7 @@ int main(int argc, char** argv) {
     if ((world_rank==0) && (1==1) && (QSee))
     { 
 
+      double MatDist[1000][1000];   
       FILE* file = NULL;
       //file = fopen("Mat2.csv", "r");
       file = fopen(argv[4], "r");
